@@ -1,4 +1,5 @@
 from pygame import *
+font.init()
 
 #create a game window
 window = display.set_mode((700, 500))
@@ -10,6 +11,7 @@ background = transform.scale(image.load('fon.jpg'), (700, 500))
 speed_x = 4
 speed_y = 4
 
+font = font.Font(None, 70)
 
 #set the fps
 clock = time.Clock()
@@ -74,29 +76,8 @@ player_2 = Player_2('poloskiii.png', 50,
                 620, 150)
 
 
-ball = Ball('balls.png', 5,
+ball = Ball('tennis.png', 5,
                 300, 150)
-
-
-
-#sprite1 = transform.scale(
-#    image.load('spritee.png'),
-#    (110, 130)
-#)
-#x_s1, y_s1 = 2, 150
-
-#sprite2 = transform.scale(
-#    image.load('spritee.png'),
- #   (110, 130)
-#)
-#x_s2, y_s2 = 600, 150
-
-#sprite3 = transform.scale(
-#    image.load('balls.png'),
-#    (130, 130)
-#)
-#x_s3, y_s3 = 300, 150
-
 
 
 #Creating a game cycle
@@ -113,37 +94,22 @@ while game:
     if sprite.collide_rect(ball, player_1):
         speed_x *= -1
 
-#create the button press event
-    #keys_pressed = key.get_pressed()
-    #if keys_pressed[K_UP] and y_s2 > 5:
-    #    y_s2 -= 10
-    #if keys_pressed[K_DOWN] and y_s2 < 400:
-    #    y_s2 += 10
-    #if keys_pressed[K_s] and y_s1 < 400:
-    #    y_s1 += 10
-    #if keys_pressed[K_w] and y_s1 > 5:
-    #    y_s1 -= 10
-
-
-
-#show the background and sprites on the window
-    #window.blit(background, (0,0))
-    #window.blit(player_1, (x_s1, y_s1))
-    #window.blit(player_2, (x_s2, y_s2))
-    #window.blit(ball, (x_s3, y_s3))
-
     if ball.rect.y < 5 or ball.rect.y > 400:
         speed_y *= -1
         
 
+#win and louse
+    win = font.render("Blue Win!", True, (255, 215, 0))
+    louse = font.render("Red Win!", True, (255, 215, 0))
+
     if ball.rect.x < 0:
-        print('BLUE Winner')
+        window.blit(win, (200, 200))
 
     if ball.rect.x > 680:
-        print('RED Winner')
+        window.blit(louse, (200, 200))
 
-    #if ball.rect.y < 0 or ball.rect.y > 400:
-    #    ball.rect.y *= -1
+
+
 
     player_1.reset()
     player_1.update()
